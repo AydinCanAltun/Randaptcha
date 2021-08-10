@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 require_once 'core.php';
 
 $_SESSION['randaptcha'] = [
@@ -7,10 +9,6 @@ $_SESSION['randaptcha'] = [
     'answer'      => $_ANSWER,
     'result'      => false
 ];
-
-
-
-header("Content-type: image/png");
 
 $font = 'assets/fonts/'. $fonts[$choosenFont] .'.otf';
 
@@ -37,16 +35,29 @@ while( abs($br - $tr) <= 60 || abs($bg - $tg) <= 60 || abs($bb - $tb) <= 60 ){
     }
 }
 
+$_SESSION['why'] = [
+    "colors" => [
+        "textColor" => [$tr, $tg, $tb],
+        "backColor" => [$br, $bg, $bb]
+    ],
+    "textDate" => [
+        "fontSize" => $fontSize,
+        "angle" => $angle,
+        "textStart" => $textStart,
+        "font" => $fonts[$choosenFont],
+        "question" => $_QUESTION
+    ]
+];
+
 $captcha = imagecreate( 300, 80 );
 $background = imagecolorallocate($captcha, $br, $bg, $bb);
 $text_colour = imagecolorallocate($captcha, $tr, $tg, $tb);
 imagettftext($captcha, $fontSize, $angle, $textStart, 40, $text_colour, $font, $_QUESTION);
-//imagestring( $captcha, 30, 30, 40, "thesitewizard.com", $text_colour );
 
 header( "Content-type: image/png" );
 imagepng( $captcha);
-imagecolordeallocate( $text_colour );
-imagecolordeallocate( $background );
+imagecolordeallocate($captcha, $text_colour );
+imagecolordeallocate($captcha, $background );
 imagedestroy( $captcha );
 
 

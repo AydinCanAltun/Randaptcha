@@ -56,8 +56,8 @@ if(count($operations) == 0){
 switch($opr_result){
     case 1:
         $_DESCRIPTION = "Please type this characters.";
-        $startAt = rand(0, 24);
-        $_QUESTION = substr(md5(rand(0, 999999999)), $startAt, $starAt + 8);
+        $startAt = rand(0, 5);
+        $_QUESTION = substr(md5(rand(0, 999999999)), $startAt, $startAt + 8);
         $_ANSWER = $_QUESTION;
     break;
 

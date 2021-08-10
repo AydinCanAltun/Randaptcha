@@ -40,7 +40,7 @@ function verify()
             if(result == "ok"){
                 document.getElementById("randaptcha").innerHTML = '<div class="sweet-alert"><div class="icon success animate"> <span class="line tip animateSuccessTip"></span> <span class="line long animateSuccessLong"></span> <div class="placeholder"></div> <div class="fix"></div> </div></div>';
             }else{
-                refresh_captcha();
+                refresh_randaptcha();
             }
         }
     });
